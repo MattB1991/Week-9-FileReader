@@ -20,34 +20,32 @@ validation purposes.
 Submit a link to your Github repository.
 '''
 import os
+import json
+import time
 
-filePath = input('What directory do you want to search?')
-fileName = input('What file am I looking for')
-completePath = filePath+fileName
 def main():
+    name = input('What is your name?'' ')
+    address = input('What is your Address?'' ')
+    phone = input('What is your phone number?'' ')
+    filePath = input('What directory do you want to search?'' ')
+    fileName = input('What file am I looking for?'' ')
+    completePath = filePath+fileName
+
     try:
-        if os.path.isfile(fileName):
-            print('File Exists')
-        if os.path.isdir(filePath): 
-            print('Directory Exists')
-        if os.path.exists(completePath): 
-            print('Complete path exists')
-            print('Complete Path',completePath)
-        with open(completePath, 'w') as fileHandle: 
-            fileHandle.write(input('What is your name?')
-            fileHandle.write(input('What is your address?')
-            fileHandle.write(input(' What is your phone number?')
-        with open(completePath, 'r') as fileHandle: 
-            data = fileHandle.read() 
-            print(data)
+        with open('filename') as file_object:
+            for line in file_object:
+                print(line)
+        
     except FileNotFoundError:
         unewfile = input('That file does not seem to exist! Would you like to create it?')
         newfile = unewfile.upper()
         if newfile == 'YES':
             with open(fileName, 'w') as f:
-                json.dump(fileName, f)
+                json.dump(name, f)
+                json.dump(address, f)
+                json.dump(phone, f)
                 print('Your file was created!')
-                main()
+                
         else:
             print('Have a great day! Program will close.')
             time.sleep(1)
@@ -60,3 +58,11 @@ def main():
             print('.')
             exit()
     
+    restart = input('Would you like to do another?')
+    if restart == 'Yes':
+        main()
+    else:
+        print('Have a great day!')
+        time.sleep(2)
+        exit()
+main()
