@@ -24,45 +24,42 @@ import json
 import time
 
 def main():
-    name = input('What is your name?'' ')
-    address = input('What is your Address?'' ')
-    phone = input('What is your phone number?'' ')
-    filePath = input('What directory do you want to search?'' ')
-    fileName = input('What file am I looking for?'' ')
-    completePath = filePath+fileName
-
-    try:
-        with open('filename') as file_object:
-            for line in file_object:
-                print(line)
-        
-    except FileNotFoundError:
-        unewfile = input('That file does not seem to exist! Would you like to create it?')
-        newfile = unewfile.upper()
-        if newfile == 'YES':
-            with open(fileName, 'w') as f:
-                json.dump(name, f)
-                json.dump(address, f)
-                json.dump(phone, f)
-                print('Your file was created!')
-                
-        else:
-            print('Have a great day! Program will close.')
-            time.sleep(1)
-            print('.')
-            time.sleep(1)
-            print('.')
-            time.sleep(1)
-            print('.')
-            time.sleep(1)
-            print('.')
-            exit()
     
-    restart = input('Would you like to do another?')
-    if restart == 'Yes':
-        main()
+    directory =input('Enter the directory for the file.'' ')
+    if directory =='':
+        directory ='.'
+    filename = input('Enter the file name.'' ')
+    time.sleep(1)
+    name = input('What is your name?'' ')
+    time.sleep(1)
+    address = input('What is you full address?'' ')
+    time.sleep(1)
+    phone =input('What is you phone number?'' ')
+    time.sleep(2)
+
+
+    with open("{}/{}.txt".format(directory, filename), 'w') as file:
+      file.write(",".join([name]))
+      file.write(",".join([address]))
+      file.write(",".join([phone]))
+
+    with open("{}/{}.txt".format(directory, filename), 'r') as file:
+      print("{}/{}.txt contents".format(directory, filename))
+      for line in file:
+        print(line)
+        time.sleep(1)
+        print('Nice! The file was created and named {}!'.format(filename))
+        uanswer = input('Was this information correct?''(Yes or No)'' ')
+    answer = uanswer.title()
+    if answer == 'Yes':
+        print('Great!')
     else:
-        print('Have a great day!')
-        time.sleep(2)
-        exit()
+        print("Let's correct that! One moment while I restart the program...")
+        time.sleep(1)
+        print('.')
+        time.sleep(1)
+        print('.')
+        time.sleep(1)
+        print('.')
+        main()
 main()
