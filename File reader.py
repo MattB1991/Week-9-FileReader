@@ -1,3 +1,4 @@
+
 '''
 FileReader.py
 
@@ -19,6 +20,7 @@ wrote to the file system and display the file contents to the user for
 validation purposes. 
 Submit a link to your Github repository.
 '''
+
 import os
 import json
 import time
@@ -36,30 +38,31 @@ def main():
     time.sleep(1)
     phone =input('What is you phone number?'' ')
     time.sleep(2)
+    
+    if os.path.isdir(directory):
+        with open("{}/{}.txt".format(directory, filename), 'w') as file:
+          file.write(",".join([name]))
+          file.write(",".join([address]))
+          file.write(",".join([phone]))
 
+        with open("{}/{}.txt".format(directory, filename), 'r') as file:
+          print("{}/{}.txt contents".format(directory, filename))
+          for line in file:
+            print(line)
+            time.sleep(1)
+            print('Nice! The file was created and named {}!'.format(filename))
+            uanswer = input('Was this information correct?''(Yes or No)'' ')
+        answer = uanswer.title()
+        if answer == 'Yes':
+            print('Great!')
+        else:
+            print("Let's correct that! One moment while I restart the program...")
+            time.sleep(1)
+            print('.')
+            time.sleep(1)
+            print('.')
+            time.sleep(1)
+            print('.')
+            main()    
 
-    with open("{}/{}.txt".format(directory, filename), 'w') as file:
-      file.write(",".join([name]))
-      file.write(",".join([address]))
-      file.write(",".join([phone]))
-
-    with open("{}/{}.txt".format(directory, filename), 'r') as file:
-      print("{}/{}.txt contents".format(directory, filename))
-      for line in file:
-        print(line)
-        time.sleep(1)
-        print('Nice! The file was created and named {}!'.format(filename))
-        uanswer = input('Was this information correct?''(Yes or No)'' ')
-    answer = uanswer.title()
-    if answer == 'Yes':
-        print('Great!')
-    else:
-        print("Let's correct that! One moment while I restart the program...")
-        time.sleep(1)
-        print('.')
-        time.sleep(1)
-        print('.')
-        time.sleep(1)
-        print('.')
-        main()
 main()
