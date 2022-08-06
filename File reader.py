@@ -1,4 +1,5 @@
 
+
 '''
 FileReader.py
 
@@ -39,7 +40,7 @@ def main():
     phone =input('What is you phone number?'' ')
     time.sleep(2)
     
-    if os.path.isdir(directory):
+    try:
         with open("{}/{}.txt".format(directory, filename), 'w') as file:
           file.write(",".join([name]))
           file.write(",".join([address]))
@@ -51,18 +52,23 @@ def main():
             print(line)
             time.sleep(1)
             print('Nice! The file was created and named {}!'.format(filename))
-            uanswer = input('Was this information correct?''(Yes or No)'' ')
-        answer = uanswer.title()
-        if answer == 'Yes':
-            print('Great!')
-        else:
-            print("Let's correct that! One moment while I restart the program...")
-            time.sleep(1)
-            print('.')
-            time.sleep(1)
-            print('.')
-            time.sleep(1)
-            print('.')
-            main()    
+    except:
+        print('This directory does not exist')
+        print("Let's try that again")
+        main()
+        
+    uanswer = input('Was this information correct?''(Yes or No)'' ')
+    answer = uanswer.title()
+    if answer == 'Yes':
+        print('Great!')
+    else:
+        print("Let's correct that! One moment while I restart the program...")
+        time.sleep(1)
+        print('.')
+        time.sleep(1)
+        print('.')
+        time.sleep(1)
+        print('.')
+        main()    
 
 main()
